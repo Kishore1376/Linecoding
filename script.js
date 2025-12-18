@@ -738,6 +738,11 @@ if (oscilloscopeBox) oscilloscopeBox.style.display = "block";
   const inputSignal = generateInputSignal(bits);
   let encodedSignal = null;
 
+  // --- Ensure encodedSignal is generated for single-channel mode ---
+  if (!compareMode && currentChannel !== 0) {
+    encodedSignal = getEncodedByChannel(currentChannel, bits, settings.amplitude);
+  }
+
   // If compare mode is active, generate two encoded signals and draw both outputs
   if (compareMode) {
     const a = compareA;
